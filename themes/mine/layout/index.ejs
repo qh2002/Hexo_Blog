@@ -1,16 +1,73 @@
-<ul>
-    <% page.posts.each(post=>{ %>
-        <li>
-            <a href="<%=url_for(post.path)%>">
+<!--主页界面-->
+
+<!-- 主页界面 -->
+<ul class="post-list">
+    <% page.posts.forEach(post => { %>
+        <li class="post-item">
+            <a href="<%= url_for(post.path) %>" class="post-title">
                 <%= post.title %>
             </a>
-            | <%- date( post.date , 'YYYY/MM/DD HH:mm') %> 
+            <span class="post-date">
+                | <%- date(post.date, 'YYYY/MM/DD HH:mm') %>
+            </span>
+            <!-- 可选：添加更多信息 -->
+            <% if (post.author) { %>
+                <span class="post-author">by <%= post.author %></span>
+            <% } %>
+            <% if (post.excerpt) { %>
+                <p class="post-excerpt"><%= post.excerpt %></p>
+            <% } %>
         </li>
     <% }) %>
-    </ul>
-    
+</ul>
+
+<!-- 分页 -->
+<div class="pagination">
     <%- paginator({
-        prev_text: '<',
-        next_text: '>'
+        prev_text: '<span>&laquo; Previous</span>',
+        next_text: '<span>Next &raquo;</span>',
+        prev_class: 'pagination-prev',
+        next_class: 'pagination-next'
     }) %>
-    
+</div>
+
+<!-- 添加一些基本样式 -->
+<style>
+    .post-list {
+        list-style: none;
+        padding: 0;
+    }
+    .post-item {
+        margin-bottom: 20px;
+    }
+    .post-title {
+        text-decoration: none;
+        color: #333;
+    }
+    .post-date {
+        font-size: 0.9em;
+        color: #666;
+    }
+    .post-author {
+        font-style: italic;
+        color: #777;
+    }
+    .post-excerpt {
+        color: #555;
+    }
+    .pagination {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .pagination-prev, .pagination-next {
+        display: inline-block;
+        margin: 0 10px;
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        color: #333;
+        text-decoration: none;
+    }
+    .pagination-prev:hover, .pagination-next:hover {
+        background-color: #f5f5f5;
+    }
+</style>
