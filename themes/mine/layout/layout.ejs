@@ -32,10 +32,36 @@
     header a:hover, footer a:hover {
         text-decoration: underline;
     }
+
+    .background-video {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 60px); /* 留出导航栏的空间后计算高度 */
+            z-index: -1; /* 将视频放在背景层 */
+            overflow: hidden;
+    }
+ 
+    .background-video video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+    }
+    .logo{
+        padding: 40px 0;
+    }
     .nav {
         display: inline-block;
     }
+    
     .content {
+        
         padding: 20px;
         max-width: 800px;
         margin: 20px auto;
@@ -65,43 +91,24 @@
     .categories a:hover, .tags a:hover {
         text-decoration: underline;
     }
-    .search-form {
-        display: inline-block;
-        position: relative;
-        top: -7px; /* 调整垂直位置以与导航链接对齐 */
-    }
-    .search-form input[type="text"] {
-        padding: 5px;
-        width: 200px; /* 搜索框宽度 */
-    }
-    .search-form button {
-        padding: 5px 10px;
-        background: #fff;
-        border: 1px solid #ccc;
-        cursor: pointer;
-    }
-    .search-form button:hover {
-        background: #e0e0e0;
-    }
 </style>
 </head>
 <body>
     <header>
+        <h1 class="logo">
+            <a href="/"><%= config.title %></a>
+        </h1>
         <h1 class="nav">
-            <a href="/"><%= config.title %></a> |
             <a href="/">首页</a> | 
             <a href="<%- url_for(config.archive_dir) %>">笔记</a> | 
             <a href="/about/">关于</a> |
             <a href="#">留言</a>
         </h1>
-        <form class="search-form" action="/search" method="get">
-            <input type="text" name="query" placeholder="搜索...">
-            <button type="submit">搜索</button>
-        </form>
     </header>
+    
     <div class="content">
-        <%- body %>
-
+       <%- body %>
+<!-- 
         <div class="categories">
             <h3>分类</h3>
             <ul>
@@ -127,6 +134,7 @@
                 <% }) %>
             </ul>
         </div>
+    -->
     </div>
     <footer>
         <div class="nav">

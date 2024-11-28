@@ -11,12 +11,12 @@
 </style>
 <body>
     <div>
-        <p class="word"><b>标题</b> </p>
+        <p class="word"><b>测试标题</b> </p>
     </div>
     <div>
         <img src="..\visual_material\miku.jpg" alt="photo" 
-            width="200" 
-            height="200" 
+            width=150px
+            height=150px 
             style="float:left; margin:10px;">
     </div>
 </body>
